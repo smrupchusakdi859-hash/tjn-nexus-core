@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TJN NEXUS CORE - Central Control Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&display=swap');
+        body {
+            font-family: 'JetBrains Mono', monospace;
+            background-color: #030712;
+            color: #f3f4f6;
+        }
+        .glow-border {
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.15);
+        }
+    </style>
+</head>
+<body class="min-h-screen p-4 md:p-6">
+
+    <header class="flex flex-col md:flex-row justify-between items-center bg-gray-900 border border-gray-800 p-4 rounded-xl mb-6 glow-border">
+        <div class="flex items-center space-x-3 mb-3 md:mb-0">
+            <div class="w-3 h-3 bg-green-500 rounded-full animate-ping"></div>
+            <h1 class="text-xl font-bold tracking-wider text-sky-400">TJN NEXUS CORE <span class="text-xs text-gray-400 font-normal">v58.0.3_FINAL</span></h1>
+        </div>
+        <div class="flex items-center space-x-4 text-xs text-gray-400">
+            <div>AUTHORITY: <span class="text-white font-semibold">Master 01</span></div>
+            <div>STATUS: <span class="text-green-400 font-semibold">OPERATIONAL / STABLE</span></div>
+            <div>TRL: <span class="text-sky-300">TRL-9</span></div>
+        </div>
+    </header>
+
+    <main class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+        <div class="lg:col-span-2 space-y-6">
+
+            <section class="bg-gray-900 border border-gray-800 p-5 rounded-xl">
+                <h2 class="text-sm font-semibold text-sky-400 uppercase tracking-widest mb-4">🌐 Global Infrastructure Nodes</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="bg-gray-950 p-4 rounded-lg border border-gray-800">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="font-bold text-white">สิงคโปร์ (Primary Hub)</span>
+                            <span class="text-xs px-2 py-0.5 bg-green-950 text-green-400 border border-green-800 rounded">ONLINE</span>
+                        </div>
+                        <p class="text-xs text-gray-400 mb-1">ประมวลผลหลัก + กระจายสัญญาณ</p>
+                        <div class="text-xs text-sky-300">Latency: 25-30 ms</div>
+                    </div>
+                    <div class="bg-gray-950 p-4 rounded-lg border border-gray-800">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="font-bold text-white">ฮ่องกง (Backup Hub)</span>
+                            <span class="text-xs px-2 py-0.5 bg-green-950 text-green-400 border border-green-800 rounded">ONLINE</span>
+                        </div>
+                        <p class="text-xs text-gray-400 mb-1">สำรองข้อมูล + ป้องกันขัดข้อง</p>
+                        <div class="text-xs text-sky-300">Latency: 30-35 ms</div>
+                    </div>
+                    <div class="bg-gray-950 p-4 rounded-lg border border-gray-800">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="font-bold text-white">ประเทศไทย (Command)</span>
+                            <span class="text-xs px-2 py-0.5 bg-green-950 text-green-400 border border-green-800 rounded">ONLINE</span>
+                        </div>
+                        <p class="text-xs text-gray-400 mb-1">ควบคุมระยะไกล + ปฏิบัติการ</p>
+                        <div class="text-xs text-sky-300">Latency: &lt; 1 ms</div>
+                    </div>
+                    <div class="bg-gray-950 p-4 rounded-lg border border-gray-800">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="font-bold text-white">Grid Hub (Compute)</span>
+                            <span class="text-xs px-2 py-0.5 bg-green-950 text-green-400 border border-green-800 rounded">ONLINE</span>
+                        </div>
+                        <p class="text-xs text-gray-400 mb-1">ประมวลผลต่อเนื่อง 24 ชม.</p>
+                        <div class="text-xs text-sky-300">Latency: 28-32 ms</div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="bg-gray-900 border border-gray-800 p-5 rounded-xl">
+                <h2 class="text-sm font-semibold text-sky-400 uppercase tracking-widest mb-4">🛡️ Operational Units & AI Core</h2>
+                <div class="space-y-3 text-xs">
+                    <div class="flex justify-between items-center bg-gray-950 p-3 rounded border border-gray-800">
+                        <span class="font-semibold text-white">Ghost Ripper</span>
+                        <span class="text-gray-400">เฝ้าระวัง ป้องกัน ตอบโต้ภัยคุกคาม</span>
+                        <span class="text-green-400 font-bold">ACTIVE</span>
+                    </div>
+                    <div class="flex justify-between items-center bg-gray-950 p-3 rounded border border-gray-800">
+                        <span class="font-semibold text-white">Code Ripper</span>
+                        <span class="text-gray-400">ตรวจสอบ รักษาความปลอดภัยโค้ด</span>
+                        <span class="text-green-400 font-bold">ACTIVE</span>
+                    </div>
+                    <div class="flex justify-between items-center bg-gray-950 p-3 rounded border border-gray-800">
+                        <span class="font-semibold text-white">AI CORE 01-03</span>
+                        <span class="text-gray-400">บัญชาการ วิเคราะห์ และตรวจสอบความปลอดภัย</span>
+                        <span class="text-green-400 font-bold">ACTIVE</span>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+        <div class="space-y-6">
+
+            <section class="bg-gray-900 border border-gray-800 p-5 rounded-xl">
+                <h2 class="text-sm font-semibold text-sky-400 uppercase tracking-widest mb-4">⚡ Master 01 Command</h2>
+                <div class="space-y-3 text-xs">
+                    <button class="w-full py-2.5 bg-sky-600 hover:bg-sky-500 text-white font-bold rounded transition tracking-wider">
+                        RUN SYSTEM SYNC
+                    </button>
+                    <button class="w-full py-2.5 bg-gray-800 hover:bg-gray-700 text-gray-200 font-bold rounded transition border border-gray-700 tracking-wider">
+                        TRIGGER HOURLY BACKUP
+                    </button>
+                    <button class="w-full py-2.5 bg-red-950 hover:bg-red-900 text-red-400 font-bold rounded transition border border-red-800 tracking-wider">
+                        EMERGENCY LOCKDOWN
+                    </button>
+                </div>
+            </section>
+
+            <section class="bg-gray-900 border border-gray-800 p-5 rounded-xl">
+                <h2 class="text-sm font-semibold text-sky-400 uppercase tracking-widest mb-4">📊 Financial & Deployment</h2>
+                <div class="space-y-3 text-xs text-gray-300">
+                    <div class="flex justify-between bg-gray-950 p-2.5 rounded border border-gray-800">
+                        <span>Financial Core:</span>
+                        <span class="text-green-400 font-semibold">Balanced / Active</span>
+                    </div>
+                    <div class="flex justify-between bg-gray-950 p-2.5 rounded border border-gray-800">
+                        <span>Runtime Engine:</span>
+                        <span class="text-sky-300">24/7 Automated</span>
+                    </div>
+                    <div class="flex justify-between bg-gray-950 p-2.5 rounded border border-gray-800">
+                        <span>Backup Protocol:</span>
+                        <span class="text-sky-300">Every 1 hr (3 Nodes)</span>
+                    </div>
+                    <div class="flex justify-between bg-gray-950 p-2.5 rounded border border-gray-800">
+                        <span>Platform:</span>
+                        <span class="text-sky-300">GitHub / Cloudflare</span>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+    </main>
+
+    <footer class="text-center text-xs text-gray-500 mt-8">
+        TJN NEXUS CORE &copy; 2026 | Authorized by Master 01 (ORCID: 0009-0001-9791-2860)
+    </footer>
+
+</body>
+</html>
