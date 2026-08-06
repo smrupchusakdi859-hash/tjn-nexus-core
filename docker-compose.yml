@@ -1,0 +1,79 @@
+version: '3.8'
+
+name: tjn-nexus-core-production
+
+networks:
+  nexus_secure_net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.28.0.0/16
+
+volumes:
+  nexus_data_store:
+    driver: local
+  nexus_logs:
+    driver: local
+
+services:
+  api_gateway:
+    image: python:3.11-slim
+    container_name: tjn_api_gateway
+    restart: always
+    working_dir: /app
+    volumes:
+      - .:/app
+      - nexus_data_store:/app/data
+      - nexus_logs:/app/logs
+    environment:
+      - ENVIRONMENT=production
+      - PORT=8888
+      - SECURE_TUNNEL_IP=100.89.244.3
+      - HARDWARE_PORT=COM3
+      - FREQUENCY_HZ=528.45
+    ports:
+      - "8888:8888"
+    networks:
+      - nexus_secure_net
+    command: >
+      sh -c "pip install --no-cache-dir -r requirements.txt &&
+             python -u src/main.py"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8888/health')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 15s
+
+  autopilot_keeper:
+    image: python:3.11-slim
+    container_name: tjn_autopilot_keeper
+    restart: always
+    working_dir: /app
+    volumes:
+      - .:/app
+      - nexus_logs:/app/logs
+    environment:
+      - KEEP_ALIVE_INTERVAL=60
+      - SYSTEM_MODE=AUTONOMOUS
+    networks:
+      - nexus_secure_net
+    command: python -u autopilot_keeper.py
+    depends_on:
+      - api_gateway
+
+  master_bridge:
+    image: python:3.11-slim
+    container_name: tjn_master_bridge
+    restart: always
+    working_dir: /app
+    volumes:
+      - .:/app
+    environment:
+      - MASTER_ID=TJN-M01-000001
+      - SECURE_GATEWAY=ACTIVE
+    networks:
+      - nexus_secure_net
+    command: python -u tjn_master_bridge.py
+    depends_on:
+      - api_gateway
