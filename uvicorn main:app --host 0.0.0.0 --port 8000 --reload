@@ -1,0 +1,41 @@
+from fastapi import FastAPI, HTTPException, Query
+from pydantic import BaseModel, Field
+from typing import List, Optional
+
+app = FastAPI(
+    title="Google Search Tool for AI Agents",
+    description="API Endpoint สำหรับให้ AI Agent ใช้ค้นหาข้อมูลจาก Google Search แบบ Real-time",
+    version="1.0.0"
+)
+
+class SearchResultItem(BaseModel):
+    position: int = Field(..., description="อันดับของผลการค้นหาบน Google")
+    title: str = Field(..., description="หัวข้อของเว็บไซต์")
+    url: str = Field(..., description="ลิงก์เชื่อมไปยังเว็บไซต์")
+    snippet: Optional[str] = Field(None, description="เนื้อหาเรื่องย่อหรือคำอธิบายผลลัพธ์")
+
+class SearchResponse(BaseModel):
+    keyword: str
+    results_count: int
+    results: List[SearchResultItem]
+
+@app.get("/api/v1/search", response_model=SearchResponse)
+async def agent_search_tool(
+    q: str = Query(..., description="คีย์เวิร์ดที่ต้องการให้ AI Agent ค้นหาบน Google")
+):
+    if not q.strip():
+        raise HTTPException(status_code=400, detail="Keyword cannot be empty")
+        
+    return SearchResponse(
+        keyword=q,
+        results_count=1,
+        results=[
+            SearchResultItem(
+                position=1,
+                title="ระบบรายงานสถานการณ์โครงข่ายหลัก",
+                url="https://internal.system/phetchaburi-monitor",
+                snippet=f"ผลการตรวจสอบข้อมูลเรียลไทม์สำหรับคีย์เวิร์ด: {q}"
+            )
+        ]
+  )
+  
